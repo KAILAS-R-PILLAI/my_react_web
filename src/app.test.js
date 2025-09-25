@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Admin from './layouts/admin';  // correct path
 
 test('renders the dashboard text', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/dashboard/i);
+  render(<Admin />);
+  const linkElement = screen.getByText(/dashboard/i); // change this if the text is different
   expect(linkElement).toBeInTheDocument();
 });
+
