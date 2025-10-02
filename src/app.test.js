@@ -20,9 +20,9 @@ test('renders the dashboard text', () => {
     </BrowserRouter>
   );
   
-  // NOTE: If this assertion still fails, you may need to check the 
-  // actual text visible in the Admin component. 
-  // It is currently looking for the text "dashboard".
-  const linkElement = screen.getByText(/dashboard/i); 
-  expect(linkElement).toBeInTheDocument();
+  // Use the element's actual role and its name (text content)
+// This finds the anchor tag <a> that links to /admin/dashboard
+const linkElement = screen.getByRole('link', { name: 'Dashboard' }); 
+expect(linkElement).toBeInTheDocument();
+expect(linkElement).toHaveAttribute('href', '/admin/dashboard');
 });
