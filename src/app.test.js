@@ -1,9 +1,18 @@
 import { render, screen } from '@testing-library/react';
-// Import the necessary router component
 import { BrowserRouter } from 'react-router-dom'; 
-import Admin from './layouts/Admin'; // Assuming this is the correct path
+import Admin from './layouts/Admin'; 
 
-// Wrap the test component render call in a BrowserRouter
+// --- FIX: Mock document.scrollingElement for JSDOM ---
+// This prevents the "Cannot set properties of undefined (setting 'scrollTop')" error.
+beforeAll(() => {
+  // Ensure document.body is present to have something to set scrollTop on
+  if (!document.body.scrollingElement) {
+    document.scrollingElement = document.body;
+  }
+});
+// ---------------------------------------------------
+
+
 test('renders the dashboard text', () => {
   render(
     <BrowserRouter>
@@ -11,10 +20,9 @@ test('renders the dashboard text', () => {
     </BrowserRouter>
   );
   
-  // Now, the component has the router context it needs.
-  // We can proceed with the original assertions.
-  const linkElement = screen.getByText(/dashboard/i); // Ensure this text exists
+  // NOTE: If this assertion still fails, you may need to check the 
+  // actual text visible in the Admin component. 
+  // It is currently looking for the text "dashboard".
+  const linkElement = screen.getByText(/dashboard/i); 
   expect(linkElement).toBeInTheDocument();
 });
-
-// If you had other tests in this file, apply the wrapper to them too.
