@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Admin from './layouts/admin';  // correct path
+import Admin from './layouts/Admin';  // correct path
 
 test('renders the dashboard text', () => {
   render(<Admin />);
